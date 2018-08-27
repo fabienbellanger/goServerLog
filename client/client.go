@@ -14,13 +14,18 @@ func Listen(port int) {
 	client, err := rpc.Dial("tcp", "localhost:"+toolbox.IntToString(port))
 	toolbox.CheckError(err, 1)
 
-	// Synchronous call
-	log := model.Log{"pos", "onet1", 1, "Message"}
+	log := model.Log{
+		Project:   "pos",
+		Server:    "onet1",
+		Number:    1,
+		Message:   "Message",
+		HourStart: "12:04:12",
+		HourEnd:   "22:56:54"}
 
-	var name string
+	var logStr string
 
-	err = client.Call("Log.DisplayProject", log, &name)
+	err = client.Call("Log.DisplayLog", log, &logStr)
 	toolbox.CheckError(err, 1)
 
-	fmt.Printf("Projet name: %s\n", name)
+	fmt.Printf("Log: %s\n", logStr)
 }

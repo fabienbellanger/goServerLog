@@ -1,24 +1,31 @@
 package model
 
-// Server type
-type Server string
-
-// Project type
-type Project string
+import "github.com/fabienbellanger/goServerLog/shared/toolbox"
 
 // Log type
 type Log struct {
-	Project Project
-	Server  Server
-	Number  int
-	Message string
-	// HourStart time.Time
-	// HourEnd   time.Time
+	Project   string
+	Server    string
+	Number    int
+	Message   string
+	HourStart string
+	HourEnd   string
 }
 
-// DisplayProject display log project name
-func (l *Log) DisplayProject(log *Log, name *Project) error {
-	*name = log.Project
+// DisplayLog display log
+func (l *Log) DisplayLog(log *Log, str *string) error {
+	*str = toolbox.IntToString(log.Number) + " x "
+	*str += "[" + log.HourStart + " - " + log.HourEnd + "] "
+	*str += log.Project + " : " + log.Message
+
+	return nil
+}
+
+// SendLogs send logs to server
+func (l *Log) SendLogs(log *[]Log, success *bool) error {
+	// TODO: Enregistrement des logs et envoi par mail
+
+	*success = true
 
 	return nil
 }

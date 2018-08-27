@@ -43,6 +43,8 @@ var ClientCommand = &cobra.Command{
 		fmt.Print("Client listening on port ")
 		color.Green(toolbox.IntToString(port) + "\n\n")
 
+		// Lancement du client RPC
+		// -----------------------
 		client.Listen(port)
 	},
 }
