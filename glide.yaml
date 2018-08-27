@@ -1,0 +1,8 @@
+package: github.com/fabienbellanger/goServerLog
+import:
+- package: github.com/spf13/cobra
+  version: ^0.0.3
+  subpackages:
+  - cobra
+- package: github.com/fatih/color
+  version: ^1.7.0
