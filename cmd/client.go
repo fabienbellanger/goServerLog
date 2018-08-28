@@ -45,6 +45,7 @@ var ClientCommand = &cobra.Command{
 
 		// Lancement du client RPC
 		// -----------------------
-		client.Listen(port)
+		// client.Listen(port)
+		client.GetLogs()
 	},
 }

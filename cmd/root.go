@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/fabienbellanger/goServerLog/shared/lib"
 	"github.com/fabienbellanger/goServerLog/shared/toolbox"
 	"github.com/spf13/cobra"
 )
@@ -17,6 +18,10 @@ var port, defaultPort int
 
 // Execute starts Cobra
 func Execute() {
+	// Initialisation de la configuration
+	// ----------------------------------
+	lib.Init()
+
 	// Lancement de la commande racine
 	// -------------------------------
 	err := RootCommand.Execute()

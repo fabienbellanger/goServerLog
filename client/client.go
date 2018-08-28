@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/rpc"
 
+	"github.com/fabienbellanger/goServerLog/shared/lib"
 	"github.com/fabienbellanger/goServerLog/shared/model"
 	"github.com/fabienbellanger/goServerLog/shared/toolbox"
 )
@@ -28,4 +29,11 @@ func Listen(port int) {
 	toolbox.CheckError(err, 1)
 
 	fmt.Printf("Log: %s\n", logStr)
+}
+
+// GetLogs get logs
+func GetLogs() {
+	// Nginx logs
+	// ----------
+	lib.GetNginxLogs()
 }
