@@ -7,12 +7,19 @@ import (
 	"github.com/fabienbellanger/goServerLog/shared/toolbox"
 )
 
+// Project type
+type Project struct {
+	Name      string
+	framework string
+}
+
 // Config type
 type Config struct {
 	Nginx struct {
 		LogsPaths  string
 		FileSuffix string
 	}
+	Projects []Project
 }
 
 // Settings global variable

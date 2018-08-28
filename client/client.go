@@ -33,6 +33,10 @@ func Listen(port int) {
 
 // GetLogs get logs
 func GetLogs() {
+	// Récupération des données
+	// ------------------------
+	settings := Settings
+
 	// Nginx logs
 	// ----------
 	lib.GetNginxLogs()

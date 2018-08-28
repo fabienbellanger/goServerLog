@@ -19,5 +19,7 @@ func GetNginxLogs() {
 	// Initialisation
 	initNginx()
 
+	// Récupération des fichiers de logs
+
 	fmt.Println(nginxSettings)
 }
