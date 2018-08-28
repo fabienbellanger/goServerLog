@@ -10,15 +10,19 @@ import (
 // Project type
 type Project struct {
 	Name      string
-	framework string
+	Framework string
+}
+
+// Nginx type
+type Nginx struct {
+	LogsPaths  string
+	FileSuffix string
+	DateFormat string
 }
 
 // Config type
 type Config struct {
-	Nginx struct {
-		LogsPaths  string
-		FileSuffix string
-	}
+	Nginx    Nginx
 	Projects []Project
 }
 

@@ -1,0 +1,12 @@
+{
+    "nginx": {
+        "logsPaths": "/home/fabien/docker/docker_linux/nginx/conf/log/",
+        "fileSuffix": "-error.log",
+        "dateFormat": "2006/01/02"
+    },
+    "projects": [
+        {"name": "pos", "framework": "symfony_1"},
+        {"name": "fidelite", "framework": "symfony_2"},
+        {"name": "jour", "framework": "lumen_5"}
+    ]
+}
