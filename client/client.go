@@ -2,6 +2,7 @@ package client
 
 import (
 	"fmt"
+	"log"
 	"net/rpc"
 
 	"github.com/fabienbellanger/goServerLog/shared/lib"
@@ -35,5 +36,5 @@ func Listen(port int) {
 func GetLogs() {
 	// Nginx logs
 	// ----------
-	lib.GetNginxLogs()
+	log.Println(lib.GetNginxLogs())
 }

@@ -2,7 +2,6 @@ package lib
 
 import (
 	"bufio"
-	"fmt"
 	"os"
 	"regexp"
 	"time"
@@ -24,7 +23,7 @@ func initSettings() {
 }
 
 // GetNginxLogs get Nginx logs
-func GetNginxLogs() {
+func GetNginxLogs() []model.Log {
 	// Initialisation
 	// --------------
 	initSettings()
@@ -32,11 +31,8 @@ func GetNginxLogs() {
 	// Récupération des logs
 	// ---------------------
 	logsTmp := getlogsFromFiles()
-	fmt.Println(logsTmp)
 
-	// Traitement des logs
-	// -------------------
-	// var logs []model.Log
+	return logsTmp
 }
 
 // getlogsFromFiles gets logs from files
@@ -55,7 +51,6 @@ func getlogsFromFiles() []model.Log {
 
 		// Lecture du fichier
 		// ------------------
-		lines := make(map[Project][]string)
 		scanner := bufio.NewScanner(file)
 
 		for scanner.Scan() {
@@ -64,12 +59,13 @@ func getlogsFromFiles() []model.Log {
 			regexResult := regexPattern.FindAllSubmatch([]byte(line), -1)
 
 			// On ne récupère que les lignes qui nous intéressent
+			// --------------------------------------------------
 			if len(regexResult) == 1 && len(regexResult[0]) == 2 {
-				lines[project] = append(lines[project], line)
-
 				// On parse la ligne pour récupérer les infos utiles
 				// -------------------------------------------------
-				regexPattern = regexp.MustCompile(`(\d{4}\/\d{2}\/\d{2})\s(\d{2}:\d{2}:\d{2}).*(?:PHP Fatal error:  |PHP Warning:  |timed out |No database selected )(?:(.*)(?:, client: )(.*)(?:, server: )(.*)(?:, request: )(.*)(?:, upstream: )(.*)(?:, host: )(.*)|(.*))`)
+				regexPattern = regexp.MustCompile(`(\d{4}\/\d{2}\/\d{2})\s(\d{2}:\d{2}:\d{2}).*` +
+					`(?:PHP Fatal error:  |PHP Warning:  |timed out |No database selected )` +
+					`(?:(.*)(?:, client: )(.*)(?:, server: )(.*)(?:, request: )(.*)(?:, upstream: )(.*)(?:, host: )(.*)|(.*))`)
 				regexResult = regexPattern.FindAllSubmatch([]byte(line), -1)
 
 				if len(regexResult) == 1 && len(regexResult[0]) == 10 {
@@ -79,7 +75,7 @@ func getlogsFromFiles() []model.Log {
 					for !(currentIndex == linesNumber || logs[currentIndex].Message == string(regexResult[0][9])) {
 						currentIndex++
 					}
-					fmt.Println(currentIndex, linesNumber)
+
 					if currentIndex == linesNumber {
 						// Pas de message trouvé, on ajoute au tableau
 						log := model.Log{
@@ -101,13 +97,6 @@ func getlogsFromFiles() []model.Log {
 			}
 		}
 	}
-	fmt.Println(len(logs))
+
 	return logs
-}
-
-// prepareFinalLogs prepare log before sending
-func prepareFinalLogs(logs []model.Log) []model.Log {
-	finalLogs := make([]model.Log, 0)
-
-	return finalLogs
 }
