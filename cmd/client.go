@@ -22,16 +22,16 @@ func init() {
 // ClientCommand : Client command
 var ClientCommand = &cobra.Command{
 	Use:   "client",
-	Short: "Start RPC client",
+	Short: "Start client",
 
 	Run: func(cmd *cobra.Command, args []string) {
 		color.Yellow(`
 
-|------------------|
-|                  |
-| Start RPC client |
-|                  |
-|------------------|
+|--------------|
+|              |
+| Start client |
+|              |
+|--------------|
 
 		`)
 
